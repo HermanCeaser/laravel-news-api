@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\NewyorkTimesApi;
+
+use App\Services\Concerns\BuildBaseRequest;
+use App\Services\Concerns\CanSendGetRequest;
+use App\Services\Contracts\NewsService;
+use App\Services\NewyorkTimesApi\Resources\NewyorkTimesApiResource;
+
+class NewyorkTimesApiService implements NewsService
+{
+
+    use CanSendGetRequest;
+    use BuildBaseRequest;
+
+    public function __construct(
+        private readonly string $baseUrl,
+        private readonly string $apiToken,
+    ) {}
+
+    public function getNews(): NewyorkTimesApiResource
+    {
+        return new NewyorkTimesApiResource(service: $this);
+    }
+}
