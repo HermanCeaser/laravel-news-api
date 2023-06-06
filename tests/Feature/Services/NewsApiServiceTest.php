@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Feature\Services;
 
 use App\Services\NewsApi\NewsApiService;

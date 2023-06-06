@@ -13,16 +13,17 @@ trait BuildBaseRequest
     {
         $request = Http::baseUrl(
             url: $this->baseUrl,
-            )->timeout(
-                seconds: $this->timeout,
-            );
+        )->timeout(
+            seconds: $this->timeout,
+        );
 
-            if (! is_null($this->retryTimes) && ! is_null($this->retrySleep)) {
-                $request->retry(
-                    times: $this->retryTimes,
-                    sleepMilliseconds: $this->retrySleep,
-                );
-            }
+        if (! is_null($this->retryTimes) && ! is_null($this->retrySleep)) {
+            $request->retry(
+                times: $this->retryTimes,
+                sleepMilliseconds: $this->retrySleep,
+            );
+        }
+
         return $request;
     }
 
@@ -36,16 +37,16 @@ trait BuildBaseRequest
     public function buildRequestWithHttpHeader(): PendingRequest
     {
         return $this->withBaseUrl()->withHeaders(
-            ['X-Api-Key' => $this->key,]
+            ['X-Api-Key' => $this->key]
         );
     }
 
-    public function buildRequestWithQueryParams(array $queryParams): PendingRequest
+    public function buildRequestWithUrlParams(array $urlParams): PendingRequest
     {
         return $this->withBaseUrl()->withUrlParameters(
             [
-                ...$queryParams,
-                'api-key' => $this->key
+                ...$urlParams,
+                'api-key' => $this->key,
             ]
         );
     }

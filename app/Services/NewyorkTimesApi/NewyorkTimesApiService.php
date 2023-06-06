@@ -11,7 +11,6 @@ use App\Services\NewyorkTimesApi\Resources\NewyorkTimesApiResource;
 
 class NewyorkTimesApiService implements NewsService
 {
-
     use CanSendGetRequest;
     use BuildBaseRequest;
 
@@ -21,7 +20,8 @@ class NewyorkTimesApiService implements NewsService
         private readonly int $timeout,
         public readonly null|int $retryTimes = null,
         public readonly null|int $retrySleep = null,
-    ) {}
+    ) {
+    }
 
     public function getNews(): NewyorkTimesApiResource
     {

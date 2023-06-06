@@ -9,12 +9,9 @@ use App\Services\Concerns\CanBeFaked;
 use App\Services\Concerns\CanSendGetRequest;
 use App\Services\Contracts\NewsService;
 use App\Services\NewsApi\Resources\NewsApiResource;
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\Http;
 
 class NewsApiService implements NewsService
 {
-
     use CanSendGetRequest;
     use BuildBaseRequest;
     use CanBeFaked;
@@ -25,9 +22,8 @@ class NewsApiService implements NewsService
         private readonly int $timeout,
         public readonly null|int $retryTimes = null,
         public readonly null|int $retrySleep = null,
-    ) {}
-
-
+    ) {
+    }
 
     public function getNews(): NewsApiResource
     {

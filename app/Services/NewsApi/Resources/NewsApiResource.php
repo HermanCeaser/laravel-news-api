@@ -1,17 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Services\NewsApi\Resources;
 
 use App\Services\NewsApi\NewsApiService;
 
-class NewsApiResource {
-
+class NewsApiResource
+{
     public function __construct(
         private readonly NewsApiService $service,
-    )
-    {}
+    ) {
+    }
 
     public function everything(string $query)
     {

@@ -20,12 +20,11 @@ class GuardianApiService implements NewsService
         private readonly int $timeout,
         public readonly null|int $retryTimes = null,
         public readonly null|int $retrySleep = null,
-    )
-    {}
+    ) {
+    }
 
     public function getNews(): GuardianApiResource
     {
         return new GuardianApiResource(service: $this);
     }
-
 }

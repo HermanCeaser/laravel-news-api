@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Contracts\NewsService;
-use App\Services\NewsAPI\NewsApiService;
+use App\Services\NewsApi\NewsApiService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

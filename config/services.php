@@ -37,7 +37,7 @@ return [
         'retry' => [
             'times' => env('NEWSAPI_RETRY_TIMES', null),
             'sleep' => env('NEWSAPI_RETRY_SLEEP', null),
-        ]
+        ],
     ],
     'guardian-api' => [
         'url' => env('GUARDIANAPI_BASE_URL', 'https://content.guardianapis.com'),
@@ -46,16 +46,16 @@ return [
         'retry' => [
             'times' => env('GUARDIANAPI_RETRY_TIMES', null),
             'sleep' => env('GUARDIANAPI_RETRY_SLEEP', null),
-        ]
+        ],
     ],
     'newyork-times-api' => [
-        'url' => env('NEWYORKTIMESAPI_BASE_URL', 'https://api.nytimes.com/'),
+        'url' => env('NEWYORKTIMESAPI_BASE_URL', 'https://api.nytimes.com'),
         'key' => env('NEWYORKTIMESAPI_KEY'),
         'timeout' => env('NEWYORKTIMESAPI_TIMEOUT', 10),
         'retry' => [
             'times' => env('NEWYORKTIMESAPI_RETRY_TIMES', null),
             'sleep' => env('NEWYORKTIMESAPI_RETRY_SLEEP', null),
-        ]
+        ],
     ],
     'github' => [
         'uri' => env('GITHUB_URI', 'https://api.github.com'),
@@ -64,7 +64,7 @@ return [
         'retry' => [
             'times' => env('GITHUB_RETRY_TIMES', null),
             'sleep' => env('GITHUB_RETRY_SLEEP', null),
-        ]
-    ]
+        ],
+    ],
 
 ];

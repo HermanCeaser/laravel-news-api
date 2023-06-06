@@ -11,8 +11,7 @@ trait CanBeFaked
     /**
      * Proxy Fake request call through to Http::fake()
      *
-     * @param null|callable|array $callback
-     * @return void
+     * @param  null|callable|array  $callback
      */
     public static function fake(null|callable|array $callback = null): void
     {
