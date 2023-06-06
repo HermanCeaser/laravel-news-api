@@ -15,8 +15,11 @@ class GuardianApiService implements NewsService
     use CanSendGetRequest;
 
     public function __construct(
-        private readonly string $baseurl,
-        private readonly string $apiToken,
+        private readonly string $baseUrl,
+        private readonly string $key,
+        private readonly int $timeout,
+        public readonly null|int $retryTimes = null,
+        public readonly null|int $retrySleep = null,
     )
     {}
 

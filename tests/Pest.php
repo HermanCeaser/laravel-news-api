@@ -13,7 +13,7 @@
 
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+    Illuminate\Foundation\Testing\RefreshDatabase::class,
 )->in('Feature');
 
 /*
@@ -30,6 +30,19 @@ uses(
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
+
+// A method to check if a dataset is invalid
+expect()->extend('toBeInvalid', function ($errors) {
+    try {
+        $this->value->__invoke();
+        test()->fail('No Validation exception was thrown');
+    } catch (\Illuminate\Validation\ValidationException $exception) {
+        foreach ($errors as $key => $error) {
+            expect(json_encode($exception->errors()[$key]))->toContain($error);
+        }
+    }
+});
+
 
 /*
 |--------------------------------------------------------------------------

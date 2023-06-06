@@ -11,37 +11,41 @@ trait BuildBaseRequest
 {
     public function withBaseUrl(): PendingRequest
     {
-        return Http::baseUrl(
+        $request = Http::baseUrl(
             url: $this->baseUrl,
-        );
+            )->timeout(
+                seconds: $this->timeout,
+            );
+
+            if (! is_null($this->retryTimes) && ! is_null($this->retrySleep)) {
+                $request->retry(
+                    times: $this->retryTimes,
+                    sleepMilliseconds: $this->retrySleep,
+                );
+            }
+        return $request;
     }
 
     public function buildRequestWithToken(): PendingRequest
     {
-        return $this->withBaseUrl()->timeout(
-            seconds: 15,
-        )->withToken(
-            token: $this->apiToken,
+        return $this->withBaseUrl()->withToken(
+            token: $this->key,
         );
     }
 
     public function buildRequestWithHttpHeader(): PendingRequest
     {
-        return $this->withBaseUrl()->timeout(
-            seconds: 15
-        )->withHeaders(
-            ['X-Api-Key' => $this->apiToken,]
+        return $this->withBaseUrl()->withHeaders(
+            ['X-Api-Key' => $this->key,]
         );
     }
 
     public function buildRequestWithQueryParams(array $queryParams): PendingRequest
     {
-        return $this->withBaseUrl()->timeout(
-            seconds: 15
-        )->withUrlParameters(
+        return $this->withBaseUrl()->withUrlParameters(
             [
                 ...$queryParams,
-                'api-key' => $this->apiToken
+                'api-key' => $this->key
             ]
         );
     }

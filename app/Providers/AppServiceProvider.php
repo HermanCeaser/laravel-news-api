@@ -25,7 +25,11 @@ class AppServiceProvider extends ServiceProvider
             abstract: NewsService::class,
             concrete: fn () => new NewsApiService(
                 baseUrl: strval(config('services.news-api.url')),
-                apiToken: strval(config('services.news-api.key')),
+                key: strval(config('services.news-api.key')),
+                timeout: env(config('services.github.timeout')),
+                retryTimes: intval(config('services.github.retry.times')),
+                retrySleep: intval(config('services.github.retry.sleep')),
+
             ),
         );
     }

@@ -3,21 +3,21 @@
 
 namespace Tests\Feature\Services;
 
-use App\Services\NewsApi\NewsApiService;
+use App\Services\NewyorkTimesApi\NewyorkTimesApiService;
 use Illuminate\Http\Client\PendingRequest;
 
-it('can build a new NewsApi Service', function () {
+it('can build a new NewyorkTimesApi Service', function () {
     expect(
-        new NewsApiService(
+        new NewyorkTimesApiService(
             baseUrl: 'BASE_URL',
             key: 'KEY',
             timeout: 10,
         )
-    )->toBeInstanceOf(NewsApiService::class);
+    )->toBeInstanceOf(NewyorkTimesApiService::class);
 });
 
 it('can create a Pending Request', function () {
-    $service = new NewsApiService(
+    $service = new NewyorkTimesApiService(
         baseUrl: 'BASE_URL',
         key: 'KEY',
         timeout: 10,
