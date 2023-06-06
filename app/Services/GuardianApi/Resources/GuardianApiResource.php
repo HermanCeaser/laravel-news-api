@@ -20,9 +20,7 @@ class GuardianApiResource implements NewsClient
         ];
 
         return $this->service->get(
-            request: $this->service->buildRequestWithUrlParams(
-                urlParams: $urlParams,
-            ),
+            request: $this->service->buildRequestWithToken(),
             url: '/all'
         );
     }
@@ -30,30 +28,28 @@ class GuardianApiResource implements NewsClient
     public function topHeadlines()
     {
         // "/top?api-key=test"
-        $urlParams = [
+        $queryParams = [
             'q' => 'top',
         ];
 
         return $this->service->get(
-            request: $this->service->buildRequestWithUrlParams(
-                urlParams: $urlParams,
-            ),
-            url: '/top-headlines'
+            request: $this->service->buildRequestWithToken(),
+            url: '/top-headlines',
+            queryParams: $queryParams
         );
     }
 
     public function search(string $query)
     {
         // "/search?api-key=test"
-        $urlParams = [
+        $queryParams = [
             'q' => $query,
         ];
 
         return $this->service->get(
-            request: $this->service->buildRequestWithUrlParams(
-                urlParams: $urlParams,
-            ),
-            url: '/search'
+            request: $this->service->buildRequestWithToken(),
+            url: '/search',
+            queryParams: $queryParams
         );
     }
 

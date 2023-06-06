@@ -43,11 +43,6 @@ trait BuildBaseRequest
 
     public function buildRequestWithUrlParams(array $urlParams): PendingRequest
     {
-        return $this->withBaseUrl()->withUrlParameters(
-            [
-                ...$urlParams,
-                'api-key' => $this->key,
-            ]
-        );
+        return $this->withBaseUrl()->withUrlParameters($urlParams);
     }
 }

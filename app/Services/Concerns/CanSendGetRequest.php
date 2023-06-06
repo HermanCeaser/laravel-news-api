@@ -9,10 +9,11 @@ use Illuminate\Http\Client\Response;
 
 trait CanSendGetRequest
 {
-    public function get(PendingRequest $request, string $url): Response
+    public function get(PendingRequest $request, string $url, ?array $queryParams = null): Response
     {
         return $request->get(
             url: $url,
+            query:$queryParams
         );
     }
 }

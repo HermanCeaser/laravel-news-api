@@ -18,8 +18,8 @@ class NewsApiService implements NewsService
 
     public function __construct(
         private readonly string $baseUrl,
-        private readonly string $key,
-        private readonly int $timeout,
+        public readonly string $key,
+        public readonly int $timeout,
         public readonly null|int $retryTimes = null,
         public readonly null|int $retrySleep = null,
     ) {
