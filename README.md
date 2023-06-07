@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel News API  (News Aggregation API)
+[![Laravel](https://github.com/iBotPeaches/LeafApp_Infinite/actions/workflows/laravel.yml/badge.svg)](https://github.com/iBotPeaches/LeafApp_Infinite/actions/workflows/laravel.yml)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+_News Aggregation API service built on Laravel_
 
-## About Laravel
+### Branches
+ * `master` - Branch off it. Must be stable.
+ * `dev` - For Development
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Configuration
+Used for the API for News Aggregation, from NewsAPI, The Guardian & Newyork Times.
+#### DB
+ * `DB_DATABASE` - MySql DB Name. Defaults to laravel_new_api
+ * `DB_USERNAME` - MySql DB Username.
+ * `DB_PASSWORD` - MySql DB Password
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### NEWSAPI 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ * `NEWSAPI_KEY_DISABLED` - The API key is given at [NewsAPI](https://newsapi.org/register).
+ * `NEWSAPI_TIMEOUT` - Defaults to 15, if not set.
+ * `NEWSAPI_RETRY_TIMES` - The number of times to retry fetching updated if failed on first request. Defaults to null, if not set
+ * `NEWSAPI_RETRY_SLEEP` - The amount of time to wait between failed requests. Defaults to null, if not set
 
-## Learning Laravel
+#### THE GUARDIAN NEWS 
+ * `GUARDIANAPI_KEY` - The API key is given at [The Guardian](https://open-platform.theguardian.com/access).
+ * `GUARDIANAPI_TIMEOUT` - Defaults to 15, if not set
+ * `GUARDIANAPI_RETRY_TIMES` - The number of times to retry fetching updated if failed on first request. Defaults to null, if not set
+ * `GUARDIANAPI_RETRY_SLEEP` - The amount of time to wait between failed requests. Defaults to null, if not set
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### THE NEWYORK TIMES 
+ * `NEWYORKTIMESAPI_KEY` - The API key is given at [The Newyork Times](https://developer.nytimes.com/)
+ * `NEWYORKTIMESAPI_TIMEOUT` - Defaults to 15, if not set
+ * `NEWYORKTIMESAPI_RETRY_TIMES` - The amount of time to wait between failed requests. Defaults to null, if not set
+ * `NEWYORKTIMESAPI_RETRY_SLEEP` - The amount of time to wait between failed requests. Defaults to null, if not set
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Setup (Docker)
+A docker-based infrastructure is available for development. If you wish to run directly on host, see [Setup](#setup) below.
 
-## Laravel Sponsors
+1. `cp .env.example .env`
+1. Set the database hostname in `.env` like `DB_HOST=laravel-news-db`
+1. `docker compose --env-file .env -p laravel-news -f docker/docker-compose.yml up -d`
+1. `docker exec -it laravel-news-php php artisan key:generate`
+1. `docker exec -it laravel-news-php php artisan migrate`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* Nginx listens at your local IP address, port 8082, e.g. http://localhost:8082
+* Mysql container's port 3306 is mapped to the host.
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Setup
+1. PHP8.2
+1. MySQL 8.0+
+1. [Composer](https://getcomposer.org/) installed.
+1. `cp .env.example .env`
+1. Popuplate Your `.env` file with the keys and databases specifics as specified in the configuration section.
+1. `composer install`
+1. `php artisan key:generate`
+1. `php artisan migrate`
+1. `php artisan serve`
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Author
+[Herman Ceaser](http://github.com/HermanCeaser)
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This Project is open sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
