@@ -6,11 +6,11 @@ use App\Services\Contracts\NewsService;
 use App\Services\GuardianApi\GuardianApiService;
 use App\Services\NewyorkTimesApi\NewyorkTimesApiService;
 use Illuminate\Http\Request;
+
 // use jcobhams\NewsApi\NewsApi;
 
 class NewsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -25,24 +25,18 @@ class NewsController extends Controller
         $sources = [
             'newsapi',
             'guardian',
-            'newyork_times'
+            'newyork_times',
         ];
 
         // $response1 = $newsService->getNews()->topHeadlines();
         $response2 = $timesService->getNews()->topHeadlines();
         // $response3 = $guardianApiService->getNews()->topHeadlines();
 
-
         // $all_articles = $newsapi->getTopHeadlines(country:'us');
-
 
         return $response2;
 
-
-
     }
-
-
 
     /**
      * Display the specified resource.

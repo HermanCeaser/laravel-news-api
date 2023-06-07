@@ -4,7 +4,6 @@ namespace App\Services\NewsApi\Resources;
 
 use App\Services\Contracts\NewsClient;
 use App\Services\NewsApi\NewsApiService;
-use GuzzleHttp\Client;
 
 class NewsApiResource implements NewsClient
 {
@@ -26,16 +25,15 @@ class NewsApiResource implements NewsClient
     public function topHeadlines()
     {
 
-        $params = array();
-        $params['country']='us';
-
+        $params = [];
+        $params['country'] = 'us';
 
         $request = $this->service->buildRequestWithToken();
         try {
-            $response =  $this->service->get(
+            $response = $this->service->get(
                 request: $request,
-                url: "/top-headlines",
-                queryParams:$params
+                url: '/top-headlines',
+                queryParams: $params
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->__toString());
@@ -53,15 +51,7 @@ class NewsApiResource implements NewsClient
     {
         return $this->service->get(
             request: $this->service->buildRequestWithHttpHeader(),
-            url: "/everything"
-        );
-    }
-
-    public function AuthHeaders($apiKey)
-    {
-        return array(
-            'Accept' => 'application/json',
-            'Authorization' => "Bearer {$apiKey}"
+            url: '/everything'
         );
     }
 }

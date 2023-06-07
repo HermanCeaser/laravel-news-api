@@ -13,7 +13,7 @@ trait CanSendGetRequest
     {
         return $request->get(
             url: $url,
-            query:$queryParams
+            query: $queryParams
         );
     }
 }

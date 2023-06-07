@@ -4,6 +4,7 @@ namespace App\Services\GuardianApi\Resources;
 
 use App\Services\Contracts\NewsClient;
 use App\Services\GuardianApi\GuardianApiService;
+use Illuminate\Http\Client\Response;
 
 class GuardianApiResource implements NewsClient
 {
@@ -12,7 +13,7 @@ class GuardianApiResource implements NewsClient
     ) {
     }
 
-    public function all()
+    public function all(): Response
     {
         // "/all?api-key=test"
         $urlParams = [
@@ -25,7 +26,7 @@ class GuardianApiResource implements NewsClient
         );
     }
 
-    public function topHeadlines()
+    public function topHeadlines(): Response
     {
         // "/top?api-key=test"
         $queryParams = [
@@ -39,7 +40,7 @@ class GuardianApiResource implements NewsClient
         );
     }
 
-    public function search(string $query)
+    public function search(string $query): Response
     {
         // "/search?api-key=test"
         $queryParams = [

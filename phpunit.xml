@@ -15,14 +15,21 @@
     <source>
         <include>
             <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./database/factories</directory>
         </include>
+        <exclude>
+            <!-- <directory>./app/Adapters</directory>s -->
+            <file>./app/Console/Kernel.php</file>
+            <file>./app/Exceptions/Handler.php</file>
+            <!-- <file>./app/Providers/HorizonServiceProvider.php</file> -->
+        </exclude>
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <env name="DB_DATABASE" value=":memory:"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="laravel_news_api_test"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

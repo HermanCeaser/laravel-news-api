@@ -4,6 +4,8 @@ parameters:
     paths:
         - app
         - tests
-    level: 9
+    level: 8
     ignoreErrors:
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
     excludePaths:

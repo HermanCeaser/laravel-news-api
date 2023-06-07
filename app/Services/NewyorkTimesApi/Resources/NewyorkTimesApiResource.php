@@ -11,6 +11,7 @@ class NewyorkTimesApiResource implements NewsClient
         private readonly NewyorkTimesApiService $service,
     ) {
     }
+
     public function all()
     {
         // "/svc/news/v3/content/all/all.json"
