@@ -1,5 +1,5 @@
 # Laravel News API  (News Aggregation API)
-[![Laravel](https://github.com/iBotPeaches/LeafApp_Infinite/actions/workflows/laravel.yml/badge.svg)](https://github.com/iBotPeaches/LeafApp_Infinite/actions/workflows/laravel.yml)
+
 
 _News Aggregation API service built on Laravel_
 
@@ -57,6 +57,9 @@ A docker-based infrastructure is available for development. If you wish to run d
 1. `php artisan key:generate`
 1. `php artisan migrate`
 1. `php artisan serve`
+
+### Usage
+* When you visit `http://localhost:8082/api/news/top-headlines` if you used docker or `http://localhost:8000/api/news/top-headlines` if you used local development, You should be able to see all the top-headlines
 
 ### Author
 [Herman Ceaser](http://github.com/HermanCeaser)
