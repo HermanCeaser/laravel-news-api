@@ -2,11 +2,16 @@
 
 namespace App\Services\NewsApi\Resources;
 
+use App\Actions\AddNewsArticlesAction;
+use App\Models\NewsArticle;
 use App\Services\Contracts\NewsClient;
+use App\Services\NewsApi\DTO\NewsApiData;
 use App\Services\NewsApi\NewsApiService;
+use Carbon\Carbon;
 
 class NewsApiResource implements NewsClient
 {
+
     public function __construct(
         private readonly NewsApiService $service,
     ) {
@@ -27,6 +32,7 @@ class NewsApiResource implements NewsClient
 
         $params = [];
         $params['country'] = 'us';
+        $params['pageSize'] = '50';
 
         $request = $this->service->buildRequestWithToken();
         try {
@@ -36,7 +42,20 @@ class NewsApiResource implements NewsClient
                 queryParams: $params
             );
             if ($response->getStatusCode() == 200) {
-                return json_decode($response->getBody()->__toString());
+                $responseData = json_decode($response->getBody());
+
+
+                // Clean the data and Post to DB
+                $articles = collect($responseData->articles);
+                $addNewsArticlesAction = new AddNewsArticlesAction();
+                $hasInserted = $addNewsArticlesAction($articles, $params);
+
+                if(!$hasInserted){
+                    dd("Failed to fetch News");
+                }
+
+                // return NewsApiData::collection(NewsArticle::all());
+
             } else {
 
                 $response_body = json_decode($response->getBody());
@@ -54,4 +73,6 @@ class NewsApiResource implements NewsClient
             url: '/everything'
         );
     }
+
+
 }

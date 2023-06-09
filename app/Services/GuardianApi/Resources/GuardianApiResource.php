@@ -15,27 +15,28 @@ class GuardianApiResource implements NewsClient
 
     public function all(): Response
     {
-        // "/all?api-key=test"
+        // "/search"
         $urlParams = [
-            'q' => 'all',
+            'api-key' => $this->service->key,
         ];
 
         return $this->service->get(
             request: $this->service->buildRequestWithToken(),
-            url: '/all'
+            url: '/search'
         );
     }
 
     public function topHeadlines(): Response
     {
-        // "/top?api-key=test"
+        // "/editions"
         $queryParams = [
-            'q' => 'top',
+            'api-key' => $this->service->key,
+            'q' => 'international'
         ];
 
         return $this->service->get(
             request: $this->service->buildRequestWithToken(),
-            url: '/top-headlines',
+            url: '/editions',
             queryParams: $queryParams
         );
     }
@@ -55,7 +56,7 @@ class GuardianApiResource implements NewsClient
     }
 
     /**This API Provides the following Endpoints
-     * 1. Content Endpoint /content
+     * 1. Content Endpoint /search
      * 2. Tag Endpoint /tags
      * 3. Section Endpoint /section
      */

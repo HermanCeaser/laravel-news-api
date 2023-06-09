@@ -39,9 +39,9 @@ A docker-based infrastructure is available for development. If you wish to run d
 
 1. `cp .env.example .env`
 1. Set the database hostname in `.env` like `DB_HOST=laravel-news-db`
-1. `docker compose --env-file .env -p laravel-news -f docker/docker-compose.yml up -d`
+1. `docker compose --env-file .env -p laravel-news -f ./docker-compose.yml up -d`
 1. `docker exec -it laravel-news-php php artisan key:generate`
-1. `docker exec -it laravel-news-php php artisan migrate`
+1. `docker exec -it laravel-news-php php artisan migrate --seed`
 
 * Nginx listens at your local IP address, port 8082, e.g. http://localhost:8082
 * Mysql container's port 3306 is mapped to the host.

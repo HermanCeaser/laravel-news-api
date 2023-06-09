@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NewsArticle;
 use App\Services\Contracts\NewsService;
 use App\Services\GuardianApi\GuardianApiService;
+use App\Services\NewsApi\DTO\NewsApiData;
 use App\Services\NewyorkTimesApi\NewyorkTimesApiService;
 use Illuminate\Http\Request;
 
@@ -24,17 +26,20 @@ class NewsController extends Controller
         // show all the news from all the resources
         $sources = [
             'newsapi',
-            'guardian',
             'newyork_times',
+            'guardian',
         ];
 
         // $response1 = $newsService->getNews()->topHeadlines();
-        $response2 = $timesService->getNews()->topHeadlines();
+        // $response2 = $timesService->getNews()->topHeadlines();
         // $response3 = $guardianApiService->getNews()->topHeadlines();
 
         // $all_articles = $newsapi->getTopHeadlines(country:'us');
 
-        return $response2;
+        $news_articles = NewsApiData::collection(NewsArticle::all())->toJson();
+        // $news_articles = NewsArticle::first();
+
+        return $news_articles;
 
     }
 
