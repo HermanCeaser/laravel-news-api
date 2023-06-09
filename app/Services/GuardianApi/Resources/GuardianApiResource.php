@@ -31,7 +31,7 @@ class GuardianApiResource implements NewsClient
         // "/editions"
         $queryParams = [
             'api-key' => $this->service->key,
-            'q' => 'international'
+            'q' => 'international',
         ];
 
         return $this->service->get(

@@ -19,6 +19,7 @@ class NewsApiData extends Data
         public ?string $url,
         public int|Optional $category_id = 1,
         public ?string $country = null,
-        public string|Optional $language="en",
-    ) {}
+        public string|Optional $language = 'en',
+    ) {
+    }
 }

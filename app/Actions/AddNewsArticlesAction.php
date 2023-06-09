@@ -5,25 +5,22 @@ namespace App\Actions;
 use App\Models\NewsArticle;
 use App\Services\NewsApi\DTO\NewsApiData;
 use Carbon\Carbon;
-use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Date;
-use Stringable;
 
 class AddNewsArticlesAction
 {
-
     public function __invoke(Collection $articlesData, ?array $params): bool
     {
         // dd($articlesData);
-        $newsArticles = $articlesData->map(function ($articleData)  use ($params) {
+        $newsArticles = $articlesData->map(function ($articleData) use ($params) {
             return $this->mapToNewsArticle($articleData, $params);
         });
-        try{
+        try {
             NewsArticle::insert($newsArticles->toArray());
+
             return true;
 
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -44,7 +41,7 @@ class AddNewsArticlesAction
 
         return [
             ...($newsData->toArray()),
-            'image' => json_encode(['image_url' => $newsData->image, 'alt' =>  substr($newsData->title, 0, 50) . '...']),
+            'image' => json_encode(['image_url' => $newsData->image, 'alt' => substr($newsData->title, 0, 50).'...']),
             'feed' => 'newsapi',
             'created_at' => now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),

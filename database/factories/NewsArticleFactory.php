@@ -30,7 +30,7 @@ class NewsArticleFactory extends Factory
             'source' => $this->faker->company,
             'title' => $this->faker->sentence,
             'url' => $this->faker->url,
-            'feed' => $this->faker->randomElement(config('constants.feed'))
+            'feed' => $this->faker->randomElement(config('constants.feed')),
         ];
     }
 }

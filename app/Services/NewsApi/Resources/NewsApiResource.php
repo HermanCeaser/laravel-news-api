@@ -7,11 +7,9 @@ use App\Models\NewsArticle;
 use App\Services\Contracts\NewsClient;
 use App\Services\NewsApi\DTO\NewsApiData;
 use App\Services\NewsApi\NewsApiService;
-use Carbon\Carbon;
 
 class NewsApiResource implements NewsClient
 {
-
     public function __construct(
         private readonly NewsApiService $service,
     ) {
@@ -44,17 +42,16 @@ class NewsApiResource implements NewsClient
             if ($response->getStatusCode() == 200) {
                 $responseData = json_decode($response->getBody());
 
-
                 // Clean the data and Post to DB
                 $articles = collect($responseData->articles);
                 $addNewsArticlesAction = new AddNewsArticlesAction();
                 $hasInserted = $addNewsArticlesAction($articles, $params);
 
-                if(!$hasInserted){
-                    dd("Failed to fetch News");
+                if (! $hasInserted) {
+                    dd('Failed to fetch News');
                 }
 
-                // return NewsApiData::collection(NewsArticle::all());
+            // return NewsApiData::collection(NewsArticle::all());
 
             } else {
 
@@ -73,6 +70,4 @@ class NewsApiResource implements NewsClient
             url: '/everything'
         );
     }
-
-
 }
