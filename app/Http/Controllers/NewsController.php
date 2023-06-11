@@ -21,23 +21,18 @@ class NewsController extends Controller
         NewyorkTimesApiService $timesService,
         GuardianApiService $guardianApiService)
     {
-
-        // $newsapi = new NewsApi($newsService->key);
-        // show all the news from all the resources
+       // show all the news from all the resources
         $sources = [
             'newsapi',
             'newyork_times',
             'guardian',
         ];
 
-        // $response1 = $newsService->getNews()->topHeadlines();
+        $response1 = $newsService->getNews()->topHeadlines();
         // $response2 = $timesService->getNews()->topHeadlines();
         // $response3 = $guardianApiService->getNews()->topHeadlines();
 
-        // $all_articles = $newsapi->getTopHeadlines(country:'us');
-
         $news_articles = NewsApiData::collection(NewsArticle::all())->toJson();
-        // $news_articles = NewsArticle::first();
 
         return $news_articles;
 
