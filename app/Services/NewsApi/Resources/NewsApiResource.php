@@ -7,6 +7,7 @@ use App\Models\NewsArticle;
 use App\Services\Contracts\NewsClient;
 use App\Services\NewsApi\DTO\NewsApiData;
 use App\Services\NewsApi\NewsApiService;
+use Illuminate\Support\Facades\Log;
 
 class NewsApiResource implements NewsClient
 {
@@ -48,7 +49,7 @@ class NewsApiResource implements NewsClient
                 $hasInserted = $addNewsArticlesAction($articles, $params);
 
                 if (! $hasInserted) {
-                    dd('Failed to fetch News');
+                    Log::info('Failed to fetch News');
                 }
 
             // return NewsApiData::collection(NewsArticle::all());
